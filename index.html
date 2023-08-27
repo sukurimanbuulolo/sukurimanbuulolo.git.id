@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/instipershp_1.js"></script>
+        <script src="data/info_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-7.762229000327602,110.4238213210584],[-7.759773488381858,110.42848157988601]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        function pop_instipershp_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['kETERANGAN'] !== null ? autolinker.link(feature.properties['kETERANGAN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_instipershp_1_0(feature) {
+            switch(String(feature.properties['kETERANGAN'])) {
+                case 'BANK BPD INSTIPER':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(19,48,239,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'BIRO KEUANGAN':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(91,147,212,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'FH':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(221,205,103,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'FP':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,131,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'FTP':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,106,196,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'GRHA INSTIPER':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(201,53,73,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'K\'STORE':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(57,224,32,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'KAMPUS INSTIPER':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(220,55,14,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'LA[ANGAN OLAHRAGA INSTIPER':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(34,191,230,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'LABOLATORIUM PUSAT':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(60,17,235,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'LAPANGAN BASKET':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,125,177,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MAKO MENWA':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(32,233,139,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MESJID INSTIPER':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,137,236,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PERPUSTAKA':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,225,108,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PILOT PLANT':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,202,109,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'STUDENT CENTER':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(128,229,216,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'TEMPAT PARKIR':
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,121,26,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_instipershp_1',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(148,212,91,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_instipershp_1');
+        map.getPane('pane_instipershp_1').style.zIndex = 401;
+        map.getPane('pane_instipershp_1').style['mix-blend-mode'] = 'normal';
+        var layer_instipershp_1 = new L.geoJson(json_instipershp_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_instipershp_1',
+            layerName: 'layer_instipershp_1',
+            pane: 'pane_instipershp_1',
+            onEachFeature: pop_instipershp_1,
+            style: style_instipershp_1_0,
+        });
+        bounds_group.addLayer(layer_instipershp_1);
+        map.addLayer(layer_instipershp_1);
+        function pop_info_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['info'] !== null ? autolinker.link(feature.properties['info'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">WEB</th>\
+                        <td>' + (feature.properties['WEB'] !== null ? autolinker.link(feature.properties['WEB'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GAMBAR'] !== null ? autolinker.link(feature.properties['GAMBAR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FOTO</th>\
+                        <td>' + (feature.properties['FOTO'] !== null ? '<img src="images/' + String(feature.properties['FOTO']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_info_2_0() {
+            return {
+                pane: 'pane_info_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,180,60,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_info_2');
+        map.getPane('pane_info_2').style.zIndex = 402;
+        map.getPane('pane_info_2').style['mix-blend-mode'] = 'normal';
+        var layer_info_2 = new L.geoJson(json_info_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_info_2',
+            layerName: 'layer_info_2',
+            pane: 'pane_info_2',
+            onEachFeature: pop_info_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_info_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_info_2);
+        map.addLayer(layer_info_2);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/info_2.png" /> info': layer_info_2,'instiper shp<br /><table><tr><td style="text-align: center;"><img src="legend/instipershp_1_BANKBPDINSTIPER0.png" /></td><td>BANK BPD INSTIPER</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_BIROKEUANGAN1.png" /></td><td>BIRO KEUANGAN</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_FH2.png" /></td><td>FH</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_FP3.png" /></td><td>FP</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_FTP4.png" /></td><td>FTP</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_GRHAINSTIPER5.png" /></td><td>GRHA INSTIPER</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_KSTORE6.png" /></td><td>K\'STORE</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_KAMPUSINSTIPER7.png" /></td><td>KAMPUS INSTIPER</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_LAANGANOLAHRAGAINSTIPER8.png" /></td><td>LA[ANGAN OLAHRAGA INSTIPER</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_LABOLATORIUMPUSAT9.png" /></td><td>LABOLATORIUM PUSAT</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_LAPANGANBASKET10.png" /></td><td>LAPANGAN BASKET</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_MAKOMENWA11.png" /></td><td>MAKO MENWA</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_MESJIDINSTIPER12.png" /></td><td>MESJID INSTIPER</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_PERPUSTAKA13.png" /></td><td>PERPUSTAKA</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_PILOTPLANT14.png" /></td><td>PILOT PLANT</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_STUDENTCENTER15.png" /></td><td>STUDENT CENTER</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_TEMPATPARKIR16.png" /></td><td>TEMPAT PARKIR</td></tr><tr><td style="text-align: center;"><img src="legend/instipershp_1_17.png" /></td><td></td></tr></table>': layer_instipershp_1,"Google Hybrid": layer_GoogleHybrid_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_instipershp_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['kETERANGAN'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Arial Rounded MT Bold\', sans-serif;">' + layer.feature.properties['kETERANGAN']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_instipershp_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_instipershp_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_instipershp_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_instipershp_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_instipershp_1]);
+        });
+        </script>
+    </body>
+</html>
